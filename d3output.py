@@ -46,14 +46,14 @@ def nodeslinktrees(profile, nodes):
             title = " (" + str(node["tweetcount"]) + " tweet"
             if node["tweetcount"] != 1:
                 title += "s"
-            title += ": " + unicode(node["source"]) + " out/" + unicode(node["target"]) + " in)"
+            title += ": " + str(node["source"]) + " out/" + str(node["target"]) + " in)"
         else:
             title = " (" + str(node["tweetcount"]) + " tweet"
             if node["tweetcount"] != 1:
                 title += "s"
             title += ")"
         nodesoutput.append({"name": node["name"], 
-            "title": unicode(node["name"]) + title})
+            "title": str(node["name"]) + title})
        
         # generate links
         for targetname in node["links"].keys():
