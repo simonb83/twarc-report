@@ -4,7 +4,7 @@ import os
 import sys
 import json
 import csv
-import StringIO
+from io import StringIO
 
 def nodeslinks(threshold):
 
@@ -31,7 +31,7 @@ def nodeslinks(threshold):
     for node in nodes:
         nodelist.append({"name": node})
     
-    print json.dump({"nodes": nodelist, "links": links})
+    print (json.dump({"nodes": nodelist, "links": links}))
 
 def nodeslinktrees(profile, nodes):
     # generate nodes json
@@ -56,7 +56,7 @@ def nodeslinktrees(profile, nodes):
             "title": unicode(node["name"]) + title})
        
         # generate links
-        for targetname in node["links"].iterkeys():
+        for targetname in node["links"].keys():
             target = node["links"][targetname]
             if target["count"] >= profile["opts"]["threshold"]:
                 linksoutput.append({
@@ -71,7 +71,7 @@ def namevaluecsv(data):
     csvout = StringIO.StringIO()
     csvwriter = csv.writer(csvout)
     csvwriter.writerow(["name", "value"])
-    for key, value in sorted(data.iteritems()):
+    for key, value in sorted(data.items()):
         csvwriter.writerow([key, value])
     return csvout.getvalue()
     
@@ -92,13 +92,13 @@ def nodeslinkcsv(data):
     for node in data:
         source = node["name"]
         # generate csv rows
-        for targetname in node["links"].iterkeys():
+        for targetname in node["links"].keys():
             csvwriter.writerow([source, targetname, node["links"][targetname]["count"]])
     return csvout.getvalue()
 
 def namevaluejson(data):
     output = []
-    for key, value in sorted(data.iteritems()):
+    for key, value in sorted(data.items()):
         output.append({"name": key, "value": value})
     return output
     
@@ -130,4 +130,4 @@ def embed(template, d3json):
         output = template.read()
         output = output.replace("$TITLE$", metadata["title"])
         output = output.replace("$DATA$", json.dumps(d3json))
-        print output
+        print (output)

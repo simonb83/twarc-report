@@ -48,5 +48,5 @@ data = profiler.report()
 if opts.output == "html":
     d3output.embed(opts.template, data)
 else:
-    print data
+    print (data)
 
