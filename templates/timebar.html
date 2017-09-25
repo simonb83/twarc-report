@@ -8,6 +8,15 @@
   font: 10px sans-serif;
 }
 
+.label{
+  font-size: 14px !important;
+  font-weight: bold !important;;
+}
+
+.bar {
+  fill: steelblue;
+}
+
 .axis path, .axis line {
   fill: none;
   stroke: #000;
@@ -29,7 +38,7 @@
 }
 </style>
 <body>
-<div id="metadata"></div>
+<!-- <div id="metadata"></div> -->
 <svg id="chart"></svg>
 <script>
 
@@ -97,19 +106,19 @@ svg.append("g")
   .attr("x", width)
   .attr("y", 30)
   .style("text-anchor", "end")
-  .text("date");
+  .text("Date");
     
 // y-axis
 svg.append("g")
   .attr("class", "y axis")
-  .call(d3.svg.axis().scale(y).orient("left"))
+  .call(d3.svg.axis().scale(y).orient("left").outerTickSize(0))
 .append("text")
   .attr("class", "label")
   .attr("transform", "rotate(-90)")
   .attr("y", -70)
   .attr("dy", ".71em")
   .style("text-anchor", "end")
-  .text("tweets");
+  .text("Tweets");
 
 var bar = svg.selectAll(".bar")
   .data(values)

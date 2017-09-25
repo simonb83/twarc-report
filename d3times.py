@@ -4,6 +4,7 @@ import optparse
 import pytz # $ pip install pytz
 from tzlocal import get_localzone # $ pip install tzlocal
 import d3output # local module
+import json
 from profiler import TimeProfiler # local module
 
 opt_parser = optparse.OptionParser()
@@ -47,6 +48,8 @@ data = profiler.report()
     
 if opts.output == "html":
     d3output.embed(opts.template, data)
+elif opts.output == "json":
+    print (json.dumps(data))
 else:
     print (data)
 

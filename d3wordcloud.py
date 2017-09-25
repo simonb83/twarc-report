@@ -6,6 +6,7 @@ import dateutil.parser
 from profiler import TimeProfiler
 import pytz
 import d3output
+import json
 
 opt_parser = optparse.OptionParser()
 opt_parser.add_option("-t", "--timezone", type=str, default="", 
@@ -117,5 +118,7 @@ data = profiler.report()
 
 if opts.output == "html":
     d3output.embed(opts.template, data)
+elif opts.output == "json":
+    print(json.dumps(data))
 else:
-    print data
+    print (data)
